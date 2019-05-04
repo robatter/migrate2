@@ -1,0 +1,10 @@
+<table id="product_category" filter="category_type=${categoryType}" virtual="" output="category_type:${categoryType}">
+	<table id="product_info" filter="category_type=${categoryType}" backIgnore="" virtual="" output="product_id:${productId},product_name:${productName}" valid="">
+		<table id="order_detail" filter="product_id=${productId}" backIgnore="" virtual="" output="order_id:${orderId}" valid="">
+			<table id="order_master" filter="order_id=${orderId}" backIgnore="" virtual="" output="buyer_openid:${buyerOpenid}" valid="">
+				<table id="seller_info" filter="id=${buyerOpenid}" backIgnore="" virtual="" valid="">
+				</table>
+			</table>
+		</table>
+	</table>
+</table>

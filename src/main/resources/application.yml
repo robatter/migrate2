@@ -1,0 +1,4 @@
+server:
+  prot: 80　　#配置访问的端口
+  servlet:
+    context-path: /migrate　　#配置访问时的项目名

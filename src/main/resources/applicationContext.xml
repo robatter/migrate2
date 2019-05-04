@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Application context definition for PetClinic Datasource.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/jee
+         http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <import resource="classpath:jdbc.xml"/>
+
+    <bean id="curMigrateDao" class="com.robatter.app.migrate.dao.MigrateDao">
+        <property name="jdbcTemplate" ref="curJdbcTemplate"/>
+    </bean>
+
+    <bean id="hisMigrateDao" class="com.robatter.app.migrate.dao.MigrateDao">
+        <property name="jdbcTemplate" ref="hisJdbcTemplate"/>
+    </bean>
+    
+    <bean id="curMigrateService" class="com.robatter.app.migrate.service.MigrateProcessService">
+        <property name="migrateDao" ref="curMigrateDao"/>
+    </bean>
+
+    <bean id="hisMigrateService" class="com.robatter.app.migrate.service.MigrateProcessService">
+        <property name="migrateDao" ref="hisMigrateDao"/>
+    </bean>
+
+    <bean id="resourcesInit" class="com.robatter.app.migrate.inits.ResourcesInit" init-method="init">
+        <property name="tableRefPath" value="tableRef.xml"/>
+    </bean>
+
+</beans>
